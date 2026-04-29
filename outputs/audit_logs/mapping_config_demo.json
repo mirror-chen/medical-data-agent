@@ -1,0 +1,54 @@
+{
+  "source_file": "demo_raw.csv",
+  "n_columns": 6,
+  "mappings": [
+    {
+      "source_column": "Subject_No",
+      "target_variable": "SUBJID",
+      "confidence": 0.95,
+      "review_status": "auto_accept_candidate",
+      "needs_review": false,
+      "reason": "Column name 'Subject_No' matched keywords for SUBJID: ['subject', 'subject_no', 'subject_id', 'subjid', 'patient', 'patient_id', 'pt_id']"
+    },
+    {
+      "source_column": "PT_GENDER",
+      "target_variable": "SEX",
+      "confidence": 0.95,
+      "review_status": "auto_accept_candidate",
+      "needs_review": false,
+      "reason": "Column name 'PT_GENDER' matched keywords for SEX: ['sex', 'gender', 'pt_gender', 'biological_sex']"
+    },
+    {
+      "source_column": "Age",
+      "target_variable": "AGE",
+      "confidence": 0.95,
+      "review_status": "auto_accept_candidate",
+      "needs_review": false,
+      "reason": "Column name 'Age' matched keywords for AGE: ['age', 'patient_age', 'subject_age']"
+    },
+    {
+      "source_column": "Treatment_Group",
+      "target_variable": "TRT01P",
+      "confidence": 0.95,
+      "review_status": "auto_accept_candidate",
+      "needs_review": false,
+      "reason": "Column name 'Treatment_Group' matched keywords for TRT01P: ['treatment', 'treatment_group', 'arm', 'group', 'trt', 'planned_treatment']"
+    },
+    {
+      "source_column": "Baseline_SBP",
+      "target_variable": "BASELINE",
+      "confidence": 0.95,
+      "review_status": "auto_accept_candidate",
+      "needs_review": false,
+      "reason": "Column name 'Baseline_SBP' matched keywords for BASELINE: ['baseline', 'baseline_value', 'baseline_sbp', 'base']"
+    },
+    {
+      "source_column": "Followup_SBP",
+      "target_variable": "AVAL",
+      "confidence": 0.85,
+      "review_status": "review_recommended",
+      "needs_review": true,
+      "reason": "Column name 'Followup_SBP' matched keywords for AVAL: ['followup', 'followup_value', 'post_baseline', 'endpoint', 'outcome', 'aval']"
+    }
+  ]
+}

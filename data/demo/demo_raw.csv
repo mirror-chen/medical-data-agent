@@ -1,0 +1,6 @@
+Subject_No,PT_GENDER,Age,Treatment_Group,Baseline_SBP,Followup_SBP
+001,1,65,Drug A,150,132
+002,2,58,Placebo,148,145
+003,1,72,Drug A,160,140
+004,2,61,Placebo,155,150
+005,1,69,Drug A,152,135

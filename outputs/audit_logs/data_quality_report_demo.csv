@@ -1,0 +1,12 @@
+section,check_name,status,value,message
+dataset_summary,raw_row_count,info,5.0,Number of rows in the raw source dataset.
+dataset_summary,raw_column_count,info,6.0,Number of columns in the raw source dataset.
+dataset_summary,adsl_row_count,info,5.0,Number of rows in the ADSL-like analysis dataset.
+dataset_summary,adsl_column_count,info,6.0,Number of columns in the ADSL-like analysis dataset.
+subject_integrity,duplicate_subject_id,pass,0.0,No duplicated subject IDs were detected.
+column_quality,missing_rate_SUBJID,pass,0.0,SUBJID has 0 missing values out of 5 records.
+column_quality,missing_rate_SEX,pass,0.0,SEX has 0 missing values out of 5 records.
+column_quality,missing_rate_AGE,pass,0.0,AGE has 0 missing values out of 5 records.
+column_quality,missing_rate_TRT01P,pass,0.0,TRT01P has 0 missing values out of 5 records.
+column_quality,missing_rate_BASELINE,pass,0.0,BASELINE has 0 missing values out of 5 records.
+column_quality,missing_rate_AVAL,pass,0.0,AVAL has 0 missing values out of 5 records.

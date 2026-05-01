@@ -13,6 +13,9 @@ from src.report.mini_csr_writer import generate_mini_csr_report
 from src.mapping.mapping_reviewer import apply_manual_overrides
 from src.mapping.mapping_qc import generate_mapping_qc_report
 from src.mapping.mapping_qc import save_mapping_qc_report
+from src.mapping.metadata_scanner import load_raw_data
+from src.audit.data_quality_report import generate_data_quality_report
+from src.audit.data_quality_report import save_data_quality_report
 
 
 if __name__ == "__main__":
@@ -22,6 +25,7 @@ if __name__ == "__main__":
     adsl_output_path = "data/adam_like/adsl_demo.csv"
     table_one_output_path = "outputs/tables/table_one_demo.csv"
     report_output_path = "outputs/reports/mini_csr_report_demo.md"
+    data_quality_output_path = "outputs/audit_logs/data_quality_report_demo.csv"
 
     metadata = scan_metadata(raw_data_path)
     mapping_draft = generate_mapping_draft(metadata)
@@ -58,6 +62,18 @@ if __name__ == "__main__":
 
     save_adsl_like_dataset(adsl_df, adsl_output_path)
 
+    raw_df = load_raw_data(raw_data_path)
+
+    data_quality_report = generate_data_quality_report(
+        raw_df=raw_df,
+        adsl_df=adsl_df,
+    )
+
+    save_data_quality_report(
+        data_quality_report,
+        data_quality_output_path,
+    )
+
     table_one = create_demographics_baseline_table(adsl_df)
     save_table(table_one, table_one_output_path)
 
@@ -91,6 +107,10 @@ if __name__ == "__main__":
     print("\nMini report preview:")
     print(mini_report)
 
+    print(f"Data quality report saved to: {data_quality_output_path}")
+
+    print("\nData quality report preview:")
+    print(data_quality_report)
 
 
 

@@ -1,0 +1,7 @@
+source_column,target_variable,confidence,human_confirmed,human_decision,review_status,risk_level,qc_message
+Subject_No,SUBJID,0.95,True,auto_accepted,auto_accepted,Low,Subject_No was automatically mapped to SUBJID with confidence 0.95.
+PT_GENDER,SEX,0.95,True,auto_accepted,auto_accepted,Low,PT_GENDER was automatically mapped to SEX with confidence 0.95.
+Age,AGE,0.95,True,auto_accepted,auto_accepted,Low,Age was automatically mapped to AGE with confidence 0.95.
+Treatment_Group,TRT01P,0.95,True,auto_accepted,auto_accepted,Low,Treatment_Group was automatically mapped to TRT01P with confidence 0.95.
+Baseline_SBP,BASELINE,0.95,True,auto_accepted,auto_accepted,Low,Baseline_SBP was automatically mapped to BASELINE with confidence 0.95.
+Followup_SBP,AVAL,0.85,True,manually_accepted,manually_accepted,Medium,Followup_SBP was manually confirmed as AVAL after review.

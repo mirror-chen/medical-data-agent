@@ -11,11 +11,14 @@ from src.tlfs.table_one import create_demographics_baseline_table
 from src.tlfs.table_one import save_table
 from src.report.mini_csr_writer import generate_mini_csr_report
 from src.mapping.mapping_reviewer import apply_manual_overrides
+from src.mapping.mapping_qc import generate_mapping_qc_report
+from src.mapping.mapping_qc import save_mapping_qc_report
 
 
 if __name__ == "__main__":
     raw_data_path = "data/demo/demo_raw.csv"
     mapping_config_path = "outputs/audit_logs/mapping_config_demo.json"
+    mapping_qc_output_path = "outputs/audit_logs/mapping_qc_report_demo.csv"
     adsl_output_path = "data/adam_like/adsl_demo.csv"
     table_one_output_path = "outputs/tables/table_one_demo.csv"
     report_output_path = "outputs/reports/mini_csr_report_demo.md"
@@ -45,6 +48,9 @@ if __name__ == "__main__":
 
     save_mapping_config(reviewed_mapping_config, mapping_config_path)
 
+    mapping_qc_report = generate_mapping_qc_report(reviewed_mapping_config)
+    save_mapping_qc_report(mapping_qc_report, mapping_qc_output_path)
+
     adsl_df = build_adsl_like_dataset(
         raw_data_path=raw_data_path,
         mapping_config_path=mapping_config_path,
@@ -65,12 +71,16 @@ if __name__ == "__main__":
     print(review_summary)
 
     print(f"\nMapping config saved to: {mapping_config_path}")
+    print(f"Mapping QC report saved to: {mapping_qc_output_path}")
     print(f"ADSL-like dataset saved to: {adsl_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
 
     print("\nReviewed mapping config:")
     pprint(reviewed_mapping_config)
+
+    print("\nMapping QC report preview:")
+    print(mapping_qc_report)
 
     print("\nADSL-like dataset preview:")
     print(adsl_df)
@@ -80,3 +90,7 @@ if __name__ == "__main__":
 
     print("\nMini report preview:")
     print(mini_report)
+
+
+
+

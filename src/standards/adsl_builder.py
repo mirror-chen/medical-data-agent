@@ -26,12 +26,12 @@ def build_adsl_like_dataset(
     for mapping in mapping_config["mappings"]:
         source_column = mapping["source_column"]
         target_variable = mapping["target_variable"]
-        confidence = mapping["confidence"]
+        human_confirmed = mapping.get("human_confirmed", False)
 
         if target_variable is None:
             continue
 
-        if confidence < 0.75:
+        if not human_confirmed:
             continue
 
         if source_column in raw_df.columns:

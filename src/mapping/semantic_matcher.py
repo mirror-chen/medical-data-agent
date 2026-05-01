@@ -113,6 +113,8 @@ def infer_target_variable(column_profile: dict[str, Any]) -> dict[str, Any]:
         "confidence": round(best_score, 2),
         "review_status": review_status,
         "needs_review": needs_review,
+        "human_confirmed": False,
+        "human_decision": "pending",
         "reason": best_reason,
     }
 

@@ -26,12 +26,17 @@ def extract_table_value(
 def generate_mini_csr_report(
         table_one: pd.DataFrame,
         output_path: Union[str, Path],
+        adsl_columns: list = None,
 ) -> str:
     """
     Generate a mini CSR-style report section based on Table 1.
     """
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if adsl_columns is None:
+        adsl_columns = []
+
+    included_variables = ", ".join(adsl_columns) if adsl_columns else "not available"
 
     drug_n = extract_table_value(table_one, "N", "Drug A")
     placebo_n = extract_table_value(table_one, "N", "Placebo")
@@ -49,8 +54,7 @@ def generate_mini_csr_report(
 
 ## 1. Data Standardization Summary
 
-The source dataset was processed through an automated data mapping workflow. Raw source columns were scanned using a metadata profiling step and mapped to an ADSL-like analysis dataset structure. The resulting analysis-ready dataset included subject identifier treatment group sex age baseline systolic blood pressure and follow-up systolic blood pressure variables.
-
+The source dataset was processed through an automated data mapping workflow. Raw source columns were scanned using a metadata profiling step and mapped to an ADSL-like analysis dataset structure. The resulting analysis-ready dataset included the following confirmed variables: {included_variables}.
 All generated mappings were stored in a JSON mapping configuration file to support traceability between the raw source data and the derived analysis dataset.
 
 ## 2. Analysis Population

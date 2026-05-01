@@ -1,0 +1,27 @@
+project:
+  name: "medical-data-agent"
+  mode: "demo"
+
+paths:
+  raw_data_path: "data/demo/demo_raw.csv"
+  mapping_config_path: "outputs/audit_logs/mapping_config_demo.json"
+  mapping_qc_output_path: "outputs/audit_logs/mapping_qc_report_demo.csv"
+  data_quality_output_path: "outputs/audit_logs/data_quality_report_demo.csv"
+  adsl_output_path: "data/adam_like/adsl_demo.csv"
+  table_one_output_path: "outputs/tables/table_one_demo.csv"
+  report_output_path: "outputs/reports/mini_csr_report_demo.md"
+
+mapping_review:
+  auto_accept_threshold: 0.90
+
+manual_overrides:
+  Followup_SBP:
+    target_variable: "AVAL"
+    human_decision: "manually_accepted"
+    reason: "Creator confirmed Followup_SBP as the post-baseline analysis value for the demo endpoint."
+
+endpoint:
+  primary_endpoint_name: "Change from baseline in systolic blood pressure"
+  baseline_variable: "BASELINE"
+  analysis_variable: "AVAL"
+  treatment_variable: "TRT01P"

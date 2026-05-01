@@ -1,47 +1,53 @@
 from pprint import pprint
 
+from src.config.config_loader import load_config
+from src.config.config_loader import get_path
+from src.config.config_loader import get_auto_accept_threshold
+from src.config.config_loader import get_manual_overrides
+
+from src.mapping.metadata_scanner import load_raw_data
 from src.mapping.metadata_scanner import scan_metadata
 from src.mapping.semantic_matcher import generate_mapping_draft
 from src.mapping.mapping_reviewer import auto_confirm_high_confidence_mappings
 from src.mapping.mapping_reviewer import summarize_review_status
-from src.mapping.mapping_config_manager import save_mapping_config
-from src.standards.adsl_builder import build_adsl_like_dataset
-from src.standards.adsl_builder import save_adsl_like_dataset
-from src.tlfs.table_one import create_demographics_baseline_table
-from src.tlfs.table_one import save_table
-from src.report.mini_csr_writer import generate_mini_csr_report
 from src.mapping.mapping_reviewer import apply_manual_overrides
+from src.mapping.mapping_config_manager import save_mapping_config
 from src.mapping.mapping_qc import generate_mapping_qc_report
 from src.mapping.mapping_qc import save_mapping_qc_report
-from src.mapping.metadata_scanner import load_raw_data
+
+from src.standards.adsl_builder import build_adsl_like_dataset
+from src.standards.adsl_builder import save_adsl_like_dataset
+
 from src.audit.data_quality_report import generate_data_quality_report
 from src.audit.data_quality_report import save_data_quality_report
 
+from src.tlfs.table_one import create_demographics_baseline_table
+from src.tlfs.table_one import save_table
+
+from src.report.mini_csr_writer import generate_mini_csr_report
+
 
 if __name__ == "__main__":
-    raw_data_path = "data/demo/demo_raw.csv"
-    mapping_config_path = "outputs/audit_logs/mapping_config_demo.json"
-    mapping_qc_output_path = "outputs/audit_logs/mapping_qc_report_demo.csv"
-    adsl_output_path = "data/adam_like/adsl_demo.csv"
-    table_one_output_path = "outputs/tables/table_one_demo.csv"
-    report_output_path = "outputs/reports/mini_csr_report_demo.md"
-    data_quality_output_path = "outputs/audit_logs/data_quality_report_demo.csv"
+    config = load_config("config.yaml")
+
+    raw_data_path = get_path(config, "raw_data_path")
+    mapping_config_path = get_path(config, "mapping_config_path")
+    mapping_qc_output_path = get_path(config, "mapping_qc_output_path")
+    data_quality_output_path = get_path(config, "data_quality_output_path")
+    adsl_output_path = get_path(config, "adsl_output_path")
+    table_one_output_path = get_path(config, "table_one_output_path")
+    report_output_path = get_path(config, "report_output_path")
+
+    auto_accept_threshold = get_auto_accept_threshold(config)
+    manual_overrides = get_manual_overrides(config)
 
     metadata = scan_metadata(raw_data_path)
     mapping_draft = generate_mapping_draft(metadata)
 
     reviewed_mapping_config = auto_confirm_high_confidence_mappings(
         mapping_draft,
-        auto_accept_threshold=0.90,
+        auto_accept_threshold=auto_accept_threshold,
     )
-
-    manual_overrides = {
-        "Followup_SBP": {
-            "target_variable": "AVAL",
-            "human_decision": "manually_accepted",
-            "reason": "Creator confirmed Followup_SBP as the post-baseline analysis value for the demo endpoint.",
-        }
-    }
 
     reviewed_mapping_config = apply_manual_overrides(
         reviewed_mapping_config,
@@ -88,6 +94,7 @@ if __name__ == "__main__":
 
     print(f"\nMapping config saved to: {mapping_config_path}")
     print(f"Mapping QC report saved to: {mapping_qc_output_path}")
+    print(f"Data quality report saved to: {data_quality_output_path}")
     print(f"ADSL-like dataset saved to: {adsl_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
@@ -98,6 +105,9 @@ if __name__ == "__main__":
     print("\nMapping QC report preview:")
     print(mapping_qc_report)
 
+    print("\nData quality report preview:")
+    print(data_quality_report)
+
     print("\nADSL-like dataset preview:")
     print(adsl_df)
 
@@ -106,11 +116,3 @@ if __name__ == "__main__":
 
     print("\nMini report preview:")
     print(mini_report)
-
-    print(f"Data quality report saved to: {data_quality_output_path}")
-
-    print("\nData quality report preview:")
-    print(data_quality_report)
-
-
-

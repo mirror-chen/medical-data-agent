@@ -26,6 +26,11 @@ from src.tlfs.table_one import save_table
 
 from src.report.mini_csr_writer import generate_mini_csr_report
 
+from src.config.config_loader import get_endpoint_config
+
+from src.efficacy.adeff_builder import build_adeff_like_dataset
+from src.efficacy.adeff_builder import save_adeff_like_dataset
+
 
 if __name__ == "__main__":
     config = load_config("config.yaml")
@@ -35,11 +40,13 @@ if __name__ == "__main__":
     mapping_qc_output_path = get_path(config, "mapping_qc_output_path")
     data_quality_output_path = get_path(config, "data_quality_output_path")
     adsl_output_path = get_path(config, "adsl_output_path")
+    adeff_output_path = get_path(config, "adeff_output_path")
     table_one_output_path = get_path(config, "table_one_output_path")
     report_output_path = get_path(config, "report_output_path")
 
     auto_accept_threshold = get_auto_accept_threshold(config)
     manual_overrides = get_manual_overrides(config)
+    endpoint_config = get_endpoint_config(config)
 
     metadata = scan_metadata(raw_data_path)
     mapping_draft = generate_mapping_draft(metadata)
@@ -67,6 +74,16 @@ if __name__ == "__main__":
     )
 
     save_adsl_like_dataset(adsl_df, adsl_output_path)
+
+    adeff_df = build_adeff_like_dataset(
+        adsl_df=adsl_df,
+        endpoint_config=endpoint_config,
+    )
+
+    save_adeff_like_dataset(
+        adeff_df,
+        adeff_output_path,
+    )
 
     raw_df = load_raw_data(raw_data_path)
 
@@ -96,6 +113,7 @@ if __name__ == "__main__":
     print(f"Mapping QC report saved to: {mapping_qc_output_path}")
     print(f"Data quality report saved to: {data_quality_output_path}")
     print(f"ADSL-like dataset saved to: {adsl_output_path}")
+    print(f"ADEFF-like dataset saved to: {adeff_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
 
@@ -110,6 +128,9 @@ if __name__ == "__main__":
 
     print("\nADSL-like dataset preview:")
     print(adsl_df)
+
+    print("\nADEFF-like dataset preview:")
+    print(adeff_df)
 
     print("\nTable 1 preview:")
     print(table_one)

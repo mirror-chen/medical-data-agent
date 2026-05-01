@@ -8,6 +8,7 @@ paths:
   mapping_qc_output_path: "outputs/audit_logs/mapping_qc_report_demo.csv"
   data_quality_output_path: "outputs/audit_logs/data_quality_report_demo.csv"
   adsl_output_path: "data/adam_like/adsl_demo.csv"
+  adeff_output_path: "data/adam_like/adeff_demo.csv"
   table_one_output_path: "outputs/tables/table_one_demo.csv"
   report_output_path: "outputs/reports/mini_csr_report_demo.md"
 

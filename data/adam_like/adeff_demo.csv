@@ -1,0 +1,6 @@
+SUBJID,TRT01P,PARAM,BASE,AVAL,CHG,PCHG
+001,Drug A,Change from baseline in systolic blood pressure,150,132,-18,-12.0
+002,Placebo,Change from baseline in systolic blood pressure,148,145,-3,-2.03
+003,Drug A,Change from baseline in systolic blood pressure,160,140,-20,-12.5
+004,Placebo,Change from baseline in systolic blood pressure,155,150,-5,-3.23
+005,Drug A,Change from baseline in systolic blood pressure,152,135,-17,-11.18

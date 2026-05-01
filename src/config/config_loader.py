@@ -48,3 +48,27 @@ def get_manual_overrides(config: dict) -> dict:
     Get manual mapping override decisions from config.
     """
     return config.get("manual_overrides", {})
+
+
+def get_endpoint_config(config: dict) -> dict:
+    """
+    Get endpoint configuration.
+    """
+    endpoint_config = config.get("endpoint", {})
+
+    required_keys = [
+        "primary_endpoint_name",
+        "baseline_variable",
+        "analysis_variable",
+        "treatment_variable",
+    ]
+
+    missing_keys = [
+        key for key in required_keys
+        if key not in endpoint_config
+    ]
+
+    if missing_keys:
+        raise KeyError(f"Missing endpoint config keys: {missing_keys}")
+
+    return endpoint_config

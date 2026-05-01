@@ -31,6 +31,11 @@ from src.config.config_loader import get_endpoint_config
 from src.efficacy.adeff_builder import build_adeff_like_dataset
 from src.efficacy.adeff_builder import save_adeff_like_dataset
 
+from src.tlfs.primary_endpoint_table import summarize_endpoint_by_group
+from src.tlfs.primary_endpoint_table import save_primary_endpoint_table
+
+from src.efficacy.treatment_difference import calculate_treatment_difference
+from src.efficacy.treatment_difference import save_treatment_difference_table
 
 if __name__ == "__main__":
     config = load_config("config.yaml")
@@ -42,6 +47,16 @@ if __name__ == "__main__":
     adsl_output_path = get_path(config, "adsl_output_path")
     adeff_output_path = get_path(config, "adeff_output_path")
     table_one_output_path = get_path(config, "table_one_output_path")
+    primary_endpoint_table_output_path = get_path(
+        config,
+        "primary_endpoint_table_output_path",
+    )
+
+    treatment_difference_output_path = get_path(
+        config,
+        "treatment_difference_output_path",
+    )
+
     report_output_path = get_path(config, "report_output_path")
 
     auto_accept_threshold = get_auto_accept_threshold(config)
@@ -85,6 +100,23 @@ if __name__ == "__main__":
         adeff_output_path,
     )
 
+    primary_endpoint_table = summarize_endpoint_by_group(adeff_df)
+
+    save_primary_endpoint_table(
+        primary_endpoint_table,
+        primary_endpoint_table_output_path,
+    )
+
+    treatment_difference_table = calculate_treatment_difference(
+        adeff_df=adeff_df,
+        endpoint_config=endpoint_config,
+    )
+
+    save_treatment_difference_table(
+        treatment_difference_table,
+        treatment_difference_output_path,
+    )
+
     raw_df = load_raw_data(raw_data_path)
 
     data_quality_report = generate_data_quality_report(
@@ -114,6 +146,8 @@ if __name__ == "__main__":
     print(f"Data quality report saved to: {data_quality_output_path}")
     print(f"ADSL-like dataset saved to: {adsl_output_path}")
     print(f"ADEFF-like dataset saved to: {adeff_output_path}")
+    print(f"Primary endpoint table saved to: {primary_endpoint_table_output_path}")
+    print(f"Treatment difference table saved to: {treatment_difference_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
 
@@ -131,6 +165,12 @@ if __name__ == "__main__":
 
     print("\nADEFF-like dataset preview:")
     print(adeff_df)
+
+    print("\nPrimary endpoint table preview:")
+    print(primary_endpoint_table)
+
+    print("\nTreatment difference table preview:")
+    print(treatment_difference_table)
 
     print("\nTable 1 preview:")
     print(table_one)

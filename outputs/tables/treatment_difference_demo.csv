@@ -1,0 +1,2 @@
+Endpoint,Active Group,Control Group,Active N,Control N,Active Mean CHG,Control Mean CHG,Mean CHG Difference,Active Mean PCHG,Control Mean PCHG,Mean PCHG Difference,Analysis Type,Interpretation Boundary
+Change from baseline in systolic blood pressure,Drug A,Placebo,3,2,-18.33,-4.0,-14.33,-11.89,-2.63,-9.26,Descriptive treatment difference,Descriptive only. Not confirmatory. No statistical inference was performed.

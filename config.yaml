@@ -10,6 +10,8 @@ paths:
   adsl_output_path: "data/adam_like/adsl_demo.csv"
   adeff_output_path: "data/adam_like/adeff_demo.csv"
   table_one_output_path: "outputs/tables/table_one_demo.csv"
+  primary_endpoint_table_output_path: "outputs/tables/primary_endpoint_table_demo.csv"
+  treatment_difference_output_path: "outputs/tables/treatment_difference_demo.csv"
   report_output_path: "outputs/reports/mini_csr_report_demo.md"
 
 mapping_review:
@@ -26,3 +28,5 @@ endpoint:
   baseline_variable: "BASELINE"
   analysis_variable: "AVAL"
   treatment_variable: "TRT01P"
+  active_group: "Drug A"
+  control_group: "Placebo"

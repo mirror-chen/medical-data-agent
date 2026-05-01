@@ -1,0 +1,4 @@
+Group,N,Mean CHG,SD CHG,Median CHG,Min CHG,Max CHG,Mean PCHG,SD PCHG
+Drug A,3,-18.33,1.53,-18.0,-20.0,-17.0,-11.89,0.67
+Placebo,2,-4.0,1.41,-4.0,-5.0,-3.0,-2.63,0.85
+Overall,5,-12.6,7.96,-17.0,-20.0,-3.0,-8.19,5.11

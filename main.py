@@ -136,6 +136,8 @@ if __name__ == "__main__":
         table_one=table_one,
         output_path=report_output_path,
         adsl_columns=adsl_df.columns.tolist(),
+        primary_endpoint_table=primary_endpoint_table,
+        treatment_difference_table=treatment_difference_table,
     )
 
     print("\nMapping review summary:")

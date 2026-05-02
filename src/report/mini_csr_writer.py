@@ -27,6 +27,8 @@ def generate_mini_csr_report(
         table_one: pd.DataFrame,
         output_path: Union[str, Path],
         adsl_columns: list = None,
+        primary_endpoint_table: pd.DataFrame = None,
+        treatment_difference_table: pd.DataFrame = None,
 ) -> str:
     """
     Generate a mini CSR-style report section based on Table 1.
@@ -50,6 +52,40 @@ def generate_mini_csr_report(
     placebo_baseline = extract_table_value(table_one, "Baseline SBP, mean (SD)", "Placebo")
     overall_baseline = extract_table_value(table_one, "Baseline SBP, mean (SD)", "Overall")
 
+    efficacy_section = ""
+
+    if primary_endpoint_table is not None and treatment_difference_table is not None:
+        drug_row = primary_endpoint_table[
+            primary_endpoint_table["Group"] == "Drug A"
+            ]
+        placebo_row = primary_endpoint_table[
+            primary_endpoint_table["Group"] == "Placebo"
+            ]
+
+        diff_row = treatment_difference_table.iloc[0]
+
+        if not drug_row.empty and not placebo_row.empty:
+            drug_mean_chg = drug_row.iloc[0]["Mean CHG"]
+            placebo_mean_chg = placebo_row.iloc[0]["Mean CHG"]
+            drug_mean_pchg = drug_row.iloc[0]["Mean PCHG"]
+            placebo_mean_pchg = placebo_row.iloc[0]["Mean PCHG"]
+
+            endpoint_name = diff_row["Endpoint"]
+            mean_chg_difference = diff_row["Mean CHG Difference"]
+            mean_pchg_difference = diff_row["Mean PCHG Difference"]
+
+            efficacy_section = f"""
+## 4. Primary Endpoint Descriptive Summary
+
+The primary endpoint was defined as {endpoint_name}.
+
+In this synthetic demo dataset, the Drug A group showed a mean change from baseline of {drug_mean_chg}, compared with {placebo_mean_chg} in the placebo group. The corresponding mean percentage change from baseline was {drug_mean_pchg}% in the Drug A group and {placebo_mean_pchg}% in the placebo group.
+
+The descriptive mean difference in change from baseline was {mean_chg_difference}, and the descriptive mean difference in percentage change from baseline was {mean_pchg_difference} percentage points.
+
+These results are descriptive only. No statistical inference was performed. The observed difference should not be interpreted as confirmatory evidence of treatment effectiveness because the dataset is synthetic and the sample size is very small.
+"""
+
     report = f"""# Mini CSR-style Report Demo
 
 ## 1. Data Standardization Summary
@@ -67,11 +103,13 @@ The mean age was {drug_age} in the Drug A group and {placebo_age} in the placebo
 
 Baseline systolic blood pressure was {drug_baseline} in the Drug A group and {placebo_baseline} in the placebo group. Overall baseline systolic blood pressure was {overall_baseline}.
 
-## 4. Interpretation
+{efficacy_section}
+
+## 5. Interpretation
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-## 5. Traceability
+## 6. Traceability
 
 The following outputs were generated during this workflow:
 

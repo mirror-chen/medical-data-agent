@@ -15,11 +15,23 @@ The mean age was 68.67 (3.51) in the Drug A group and 59.5 (2.12) in the placebo
 
 Baseline systolic blood pressure was 154.0 (5.29) in the Drug A group and 151.5 (4.95) in the placebo group. Overall baseline systolic blood pressure was 153.0 (4.69).
 
-## 4. Interpretation
+
+## 4. Primary Endpoint Descriptive Summary
+
+The primary endpoint was defined as Change from baseline in systolic blood pressure.
+
+In this synthetic demo dataset, the Drug A group showed a mean change from baseline of -18.33, compared with -4.0 in the placebo group. The corresponding mean percentage change from baseline was -11.89% in the Drug A group and -2.63% in the placebo group.
+
+The descriptive mean difference in change from baseline was -14.33, and the descriptive mean difference in percentage change from baseline was -9.26 percentage points.
+
+These results are descriptive only. No statistical inference was performed. The observed difference should not be interpreted as confirmatory evidence of treatment effectiveness because the dataset is synthetic and the sample size is very small.
+
+
+## 5. Interpretation
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-## 5. Traceability
+## 6. Traceability
 
 The following outputs were generated during this workflow:
 

@@ -1,0 +1,2 @@
+Endpoint,Analysis Type,Active Group,Control Group,Active N,Control N,Active Mean CHG,Control Mean CHG,Mean CHG Difference,Standard Error,Degrees of Freedom,T Statistic,P Value,CI Level,CI Lower,CI Upper,Interpretation Boundary
+Change from baseline in systolic blood pressure,Exploratory Welch two-sample t-test,Drug A,Placebo,3,2,-18.33,-4.0,-14.33,1.3333,2.4265,-10.75,0.0042,95%,-19.2,-9.46,Exploratory only. Not confirmatory. The dataset is synthetic and the sample size is very small.

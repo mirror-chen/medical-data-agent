@@ -13,6 +13,7 @@ paths:
   primary_endpoint_table_output_path: "outputs/tables/primary_endpoint_table_demo.csv"
   treatment_difference_output_path: "outputs/tables/treatment_difference_demo.csv"
   report_output_path: "outputs/reports/mini_csr_report_demo.md"
+  exploratory_ttest_output_path: "outputs/tables/exploratory_ttest_demo.csv"
 
 mapping_review:
   auto_accept_threshold: 0.90
@@ -30,3 +31,4 @@ endpoint:
   treatment_variable: "TRT01P"
   active_group: "Drug A"
   control_group: "Placebo"
+  alpha: 0.05

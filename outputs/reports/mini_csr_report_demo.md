@@ -31,7 +31,7 @@ These results are descriptive only. No statistical inference was performed. The 
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-### 6. Traceability
+## 6. Traceability
 
 The following outputs were generated during this workflow:
 
@@ -43,4 +43,5 @@ The following outputs were generated during this workflow:
 - Table 1: `outputs/tables/table_one_demo.csv`
 - Primary endpoint table: `outputs/tables/primary_endpoint_table_demo.csv`
 - Treatment difference table: `outputs/tables/treatment_difference_demo.csv`
+- Exploratory t-test table: `outputs/tables/exploratory_ttest_demo.csv`
 

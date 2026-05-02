@@ -37,6 +37,9 @@ from src.tlfs.primary_endpoint_table import save_primary_endpoint_table
 from src.efficacy.treatment_difference import calculate_treatment_difference
 from src.efficacy.treatment_difference import save_treatment_difference_table
 
+from src.efficacy.statistical_tests import welch_ttest_chg
+from src.efficacy.statistical_tests import save_exploratory_ttest_table
+
 if __name__ == "__main__":
     config = load_config("config.yaml")
 
@@ -55,6 +58,11 @@ if __name__ == "__main__":
     treatment_difference_output_path = get_path(
         config,
         "treatment_difference_output_path",
+    )
+
+    exploratory_ttest_output_path = get_path(
+        config,
+        "exploratory_ttest_output_path",
     )
 
     report_output_path = get_path(config, "report_output_path")
@@ -117,6 +125,16 @@ if __name__ == "__main__":
         treatment_difference_output_path,
     )
 
+    exploratory_ttest_table = welch_ttest_chg(
+        adeff_df=adeff_df,
+        endpoint_config=endpoint_config,
+    )
+
+    save_exploratory_ttest_table(
+        exploratory_ttest_table,
+        exploratory_ttest_output_path,
+    )
+
     raw_df = load_raw_data(raw_data_path)
 
     data_quality_report = generate_data_quality_report(
@@ -141,6 +159,7 @@ if __name__ == "__main__":
         "Table 1": table_one_output_path,
         "Primary endpoint table": primary_endpoint_table_output_path,
         "Treatment difference table": treatment_difference_output_path,
+        "Exploratory t-test table": exploratory_ttest_output_path,
     }
 
     mini_report = generate_mini_csr_report(
@@ -162,6 +181,7 @@ if __name__ == "__main__":
     print(f"ADEFF-like dataset saved to: {adeff_output_path}")
     print(f"Primary endpoint table saved to: {primary_endpoint_table_output_path}")
     print(f"Treatment difference table saved to: {treatment_difference_output_path}")
+    print(f"Exploratory t-test table saved to: {exploratory_ttest_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
 
@@ -185,6 +205,9 @@ if __name__ == "__main__":
 
     print("\nTreatment difference table preview:")
     print(treatment_difference_table)
+
+    print("\nExploratory t-test table preview:")
+    print(exploratory_ttest_table)
 
     print("\nTable 1 preview:")
     print(table_one)

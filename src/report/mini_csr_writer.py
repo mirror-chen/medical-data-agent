@@ -29,6 +29,7 @@ def generate_mini_csr_report(
         adsl_columns: list = None,
         primary_endpoint_table: pd.DataFrame = None,
         treatment_difference_table: pd.DataFrame = None,
+        output_files: dict = None,
 ) -> str:
     """
     Generate a mini CSR-style report section based on Table 1.
@@ -39,6 +40,16 @@ def generate_mini_csr_report(
         adsl_columns = []
 
     included_variables = ", ".join(adsl_columns) if adsl_columns else "not available"
+
+    if output_files is None:
+        output_files = {}
+
+    traceability_lines = []
+
+    for label, path in output_files.items():
+        traceability_lines.append(f"- {label}: `{path}`")
+
+    traceability_text = "\n".join(traceability_lines)
 
     drug_n = extract_table_value(table_one, "N", "Drug A")
     placebo_n = extract_table_value(table_one, "N", "Placebo")
@@ -113,9 +124,7 @@ This mini report demonstrates the first end-to-end workflow from raw client-styl
 
 The following outputs were generated during this workflow:
 
-- Mapping configuration: `outputs/audit_logs/mapping_config_demo.json`
-- ADSL-like dataset: `data/adam_like/adsl_demo.csv`
-- Table 1: `outputs/tables/table_one_demo.csv`
+{traceability_text}
 
 """
 

@@ -31,11 +31,16 @@ These results are descriptive only. No statistical inference was performed. The 
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-## 6. Traceability
+### 6. Traceability
 
 The following outputs were generated during this workflow:
 
 - Mapping configuration: `outputs/audit_logs/mapping_config_demo.json`
+- Mapping QC report: `outputs/audit_logs/mapping_qc_report_demo.csv`
+- Data quality report: `outputs/audit_logs/data_quality_report_demo.csv`
 - ADSL-like dataset: `data/adam_like/adsl_demo.csv`
+- ADEFF-like dataset: `data/adam_like/adeff_demo.csv`
 - Table 1: `outputs/tables/table_one_demo.csv`
+- Primary endpoint table: `outputs/tables/primary_endpoint_table_demo.csv`
+- Treatment difference table: `outputs/tables/treatment_difference_demo.csv`
 

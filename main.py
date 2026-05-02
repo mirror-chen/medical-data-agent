@@ -132,12 +132,24 @@ if __name__ == "__main__":
     table_one = create_demographics_baseline_table(adsl_df)
     save_table(table_one, table_one_output_path)
 
+    output_files = {
+        "Mapping configuration": mapping_config_path,
+        "Mapping QC report": mapping_qc_output_path,
+        "Data quality report": data_quality_output_path,
+        "ADSL-like dataset": adsl_output_path,
+        "ADEFF-like dataset": adeff_output_path,
+        "Table 1": table_one_output_path,
+        "Primary endpoint table": primary_endpoint_table_output_path,
+        "Treatment difference table": treatment_difference_output_path,
+    }
+
     mini_report = generate_mini_csr_report(
         table_one=table_one,
         output_path=report_output_path,
         adsl_columns=adsl_df.columns.tolist(),
         primary_endpoint_table=primary_endpoint_table,
         treatment_difference_table=treatment_difference_table,
+        output_files=output_files,
     )
 
     print("\nMapping review summary:")

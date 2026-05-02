@@ -168,6 +168,7 @@ if __name__ == "__main__":
         adsl_columns=adsl_df.columns.tolist(),
         primary_endpoint_table=primary_endpoint_table,
         treatment_difference_table=treatment_difference_table,
+        exploratory_ttest_table=exploratory_ttest_table,
         output_files=output_files,
     )
 

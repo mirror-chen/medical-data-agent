@@ -29,6 +29,7 @@ def generate_mini_csr_report(
         adsl_columns: list = None,
         primary_endpoint_table: pd.DataFrame = None,
         treatment_difference_table: pd.DataFrame = None,
+        exploratory_ttest_table: pd.DataFrame = None,
         output_files: dict = None,
 ) -> str:
     """
@@ -64,6 +65,7 @@ def generate_mini_csr_report(
     overall_baseline = extract_table_value(table_one, "Baseline SBP, mean (SD)", "Overall")
 
     efficacy_section = ""
+    statistical_addendum = ""
 
     if primary_endpoint_table is not None and treatment_difference_table is not None:
         drug_row = primary_endpoint_table[
@@ -97,11 +99,32 @@ The descriptive mean difference in change from baseline was {mean_chg_difference
 These results are descriptive only. No statistical inference was performed. The observed difference should not be interpreted as confirmatory evidence of treatment effectiveness because the dataset is synthetic and the sample size is very small.
 """
 
+        if exploratory_ttest_table is not None:
+            ttest_row = exploratory_ttest_table.iloc[0]
+
+            analysis_type = ttest_row["Analysis Type"]
+            mean_chg_difference = ttest_row["Mean CHG Difference"]
+            ci_level = ttest_row["CI Level"]
+            ci_lower = ttest_row["CI Lower"]
+            ci_upper = ttest_row["CI Upper"]
+            p_value = ttest_row["P Value"]
+
+            statistical_addendum = f"""
+## 5. Exploratory Statistical Addendum
+
+An {analysis_type} was generated for demonstration purposes using change from baseline as the analysis variable.
+
+The estimated mean difference in change from baseline was {mean_chg_difference}. The {ci_level} confidence interval was {ci_lower} to {ci_upper}. The exploratory p-value was {p_value}.
+
+This analysis is exploratory only and should not be interpreted as confirmatory evidence of treatment effectiveness. The dataset is synthetic and includes a very small number of subjects.
+"""
+
     report = f"""# Mini CSR-style Report Demo
 
 ## 1. Data Standardization Summary
 
 The source dataset was processed through an automated data mapping workflow. Raw source columns were scanned using a metadata profiling step and mapped to an ADSL-like analysis dataset structure. The resulting analysis-ready dataset included the following confirmed variables: {included_variables}.
+
 All generated mappings were stored in a JSON mapping configuration file to support traceability between the raw source data and the derived analysis dataset.
 
 ## 2. Analysis Population
@@ -115,12 +138,13 @@ The mean age was {drug_age} in the Drug A group and {placebo_age} in the placebo
 Baseline systolic blood pressure was {drug_baseline} in the Drug A group and {placebo_baseline} in the placebo group. Overall baseline systolic blood pressure was {overall_baseline}.
 
 {efficacy_section}
+{statistical_addendum}
 
-## 5. Interpretation
+## 6. Interpretation
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-## 6. Traceability
+## 7. Traceability
 
 The following outputs were generated during this workflow:
 

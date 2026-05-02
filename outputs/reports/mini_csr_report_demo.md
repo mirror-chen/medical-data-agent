@@ -27,11 +27,20 @@ The descriptive mean difference in change from baseline was -14.33, and the desc
 These results are descriptive only. No statistical inference was performed. The observed difference should not be interpreted as confirmatory evidence of treatment effectiveness because the dataset is synthetic and the sample size is very small.
 
 
-## 5. Interpretation
+## 5. Exploratory Statistical Addendum
+
+An Exploratory Welch two-sample t-test was generated for demonstration purposes using change from baseline as the analysis variable.
+
+The estimated mean difference in change from baseline was -14.33. The 95% confidence interval was -19.2 to -9.46. The exploratory p-value was 0.0042.
+
+This analysis is exploratory only and should not be interpreted as confirmatory evidence of treatment effectiveness. The dataset is synthetic and includes a very small number of subjects.
+
+
+## 6. Interpretation
 
 This mini report demonstrates the first end-to-end workflow from raw client-style data to a standardized analysis-ready dataset and a structured CSR-style narrative. The current output is descriptive only and should not be interpreted as evidence of treatment effectiveness or safety.
 
-## 6. Traceability
+## 7. Traceability
 
 The following outputs were generated during this workflow:
 

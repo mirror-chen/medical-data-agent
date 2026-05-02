@@ -40,6 +40,14 @@ from src.efficacy.treatment_difference import save_treatment_difference_table
 from src.efficacy.statistical_tests import welch_ttest_chg
 from src.efficacy.statistical_tests import save_exploratory_ttest_table
 
+from src.config.config_loader import get_safety_config
+
+from src.safety.adae_builder import build_adae_like_dataset
+from src.safety.adae_builder import save_adae_like_dataset
+
+from src.tlfs.safety_summary_table import create_safety_summary_table
+from src.tlfs.safety_summary_table import save_safety_summary_table
+
 if __name__ == "__main__":
     config = load_config("config.yaml")
 
@@ -66,10 +74,17 @@ if __name__ == "__main__":
     )
 
     report_output_path = get_path(config, "report_output_path")
+    raw_ae_data_path = get_path(config, "raw_ae_data_path")
+    adae_output_path = get_path(config, "adae_output_path")
+    safety_summary_table_output_path = get_path(
+        config,
+        "safety_summary_table_output_path",
+    )
 
     auto_accept_threshold = get_auto_accept_threshold(config)
     manual_overrides = get_manual_overrides(config)
     endpoint_config = get_endpoint_config(config)
+    safety_config = get_safety_config(config)
 
     metadata = scan_metadata(raw_data_path)
     mapping_draft = generate_mapping_draft(metadata)
@@ -97,6 +112,16 @@ if __name__ == "__main__":
     )
 
     save_adsl_like_dataset(adsl_df, adsl_output_path)
+    adae_df = build_adae_like_dataset(
+        raw_ae_data_path=raw_ae_data_path,
+        adsl_df=adsl_df,
+        safety_config=safety_config,
+    )
+
+    save_adae_like_dataset(
+        adae_df,
+        adae_output_path,
+    )
 
     adeff_df = build_adeff_like_dataset(
         adsl_df=adsl_df,
@@ -150,6 +175,16 @@ if __name__ == "__main__":
     table_one = create_demographics_baseline_table(adsl_df)
     save_table(table_one, table_one_output_path)
 
+    safety_summary_table = create_safety_summary_table(
+        adae_df=adae_df,
+        adsl_df=adsl_df,
+    )
+
+    save_safety_summary_table(
+        safety_summary_table,
+        safety_summary_table_output_path,
+    )
+
     output_files = {
         "Mapping configuration": mapping_config_path,
         "Mapping QC report": mapping_qc_output_path,
@@ -160,6 +195,8 @@ if __name__ == "__main__":
         "Primary endpoint table": primary_endpoint_table_output_path,
         "Treatment difference table": treatment_difference_output_path,
         "Exploratory t-test table": exploratory_ttest_output_path,
+        "ADAE-like dataset": adae_output_path,
+        "Safety summary table": safety_summary_table_output_path,
     }
 
     mini_report = generate_mini_csr_report(
@@ -184,6 +221,8 @@ if __name__ == "__main__":
     print(f"Treatment difference table saved to: {treatment_difference_output_path}")
     print(f"Exploratory t-test table saved to: {exploratory_ttest_output_path}")
     print(f"Table 1 saved to: {table_one_output_path}")
+    print(f"ADAE-like dataset saved to: {adae_output_path}")
+    print(f"Safety summary table saved to: {safety_summary_table_output_path}")
     print(f"Mini CSR-style report saved to: {report_output_path}")
 
     print("\nReviewed mapping config:")
@@ -212,6 +251,12 @@ if __name__ == "__main__":
 
     print("\nTable 1 preview:")
     print(table_one)
+
+    print("\nADAE-like dataset preview:")
+    print(adae_df)
+
+    print("\nSafety summary table preview:")
+    print(safety_summary_table)
 
     print("\nMini report preview:")
     print(mini_report)

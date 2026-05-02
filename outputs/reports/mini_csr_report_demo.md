@@ -3,6 +3,7 @@
 ## 1. Data Standardization Summary
 
 The source dataset was processed through an automated data mapping workflow. Raw source columns were scanned using a metadata profiling step and mapped to an ADSL-like analysis dataset structure. The resulting analysis-ready dataset included the following confirmed variables: SUBJID, SEX, AGE, TRT01P, BASELINE, AVAL.
+
 All generated mappings were stored in a JSON mapping configuration file to support traceability between the raw source data and the derived analysis dataset.
 
 ## 2. Analysis Population
@@ -53,4 +54,6 @@ The following outputs were generated during this workflow:
 - Primary endpoint table: `outputs/tables/primary_endpoint_table_demo.csv`
 - Treatment difference table: `outputs/tables/treatment_difference_demo.csv`
 - Exploratory t-test table: `outputs/tables/exploratory_ttest_demo.csv`
+- ADAE-like dataset: `data/adam_like/adae_demo.csv`
+- Safety summary table: `outputs/tables/safety_summary_table_demo.csv`
 

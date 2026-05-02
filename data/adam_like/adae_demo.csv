@@ -1,0 +1,7 @@
+SUBJID,TRT01P,AETERM,ASTDY,AENDY,AESEV,AESER,AEREL,TRTEMFL
+001,Drug A,Headache,3,5,MILD,N,Y,Y
+001,Drug A,Nausea,8,9,MODERATE,N,Y,Y
+002,Placebo,Dizziness,4,4,MILD,N,N,Y
+003,Drug A,Hypertension,2,6,SEVERE,Y,Y,Y
+004,Placebo,Headache,10,11,MILD,N,N,Y
+005,Drug A,Fatigue,1,3,MODERATE,N,Y,Y

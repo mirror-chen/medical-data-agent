@@ -72,3 +72,10 @@ def get_endpoint_config(config: dict) -> dict:
         raise KeyError(f"Missing endpoint config keys: {missing_keys}")
 
     return endpoint_config
+
+
+def get_safety_config(config: dict) -> dict:
+    """
+    Get safety configuration.
+    """
+    return config.get("safety", {})

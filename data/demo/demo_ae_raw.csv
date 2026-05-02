@@ -1,0 +1,7 @@
+Subject_No,Treatment_Group,AE_Term,AE_Start_Day,AE_End_Day,AE_Severity,AE_Serious,AE_Related
+001,Drug A,Headache,3,5,Mild,N,Y
+001,Drug A,Nausea,8,9,Moderate,N,Y
+002,Placebo,Dizziness,4,4,Mild,N,N
+003,Drug A,Hypertension,2,6,Severe,Y,Y
+004,Placebo,Headache,10,11,Mild,N,N
+005,Drug A,Fatigue,1,3,Moderate,N,Y

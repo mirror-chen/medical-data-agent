@@ -12,8 +12,11 @@ paths:
   table_one_output_path: "outputs/tables/table_one_demo.csv"
   primary_endpoint_table_output_path: "outputs/tables/primary_endpoint_table_demo.csv"
   treatment_difference_output_path: "outputs/tables/treatment_difference_demo.csv"
-  report_output_path: "outputs/reports/mini_csr_report_demo.md"
   exploratory_ttest_output_path: "outputs/tables/exploratory_ttest_demo.csv"
+  raw_ae_data_path: "data/demo/demo_ae_raw.csv"
+  adae_output_path: "data/adam_like/adae_demo.csv"
+  safety_summary_table_output_path: "outputs/tables/safety_summary_table_demo.csv"
+  report_output_path: "outputs/reports/mini_csr_report_demo.md"
 
 mapping_review:
   auto_accept_threshold: 0.90
